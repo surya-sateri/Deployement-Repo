@@ -5,7 +5,8 @@ import mongoose from "mongoose";
 export const dbConnection = async () => {
   console.log("Connecting to MongoDB URI:", process.env.MONGODB_URI);
   try {
-    await mongoose.connect(process.env.MONGODB_URI,  { family: 4 });
+    const options = process.env.MONGO_USE_IPV4 === "true" ? { family: 4 } : {};
+    await mongoose.connect(process.env.MONGODB_URI,options);
     console.log("DB connection established: ",process.env.MONGODB_URI);
   } catch (error) {
       const state = mongoose.connection.readyState;

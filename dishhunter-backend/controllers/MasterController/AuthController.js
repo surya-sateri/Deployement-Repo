@@ -44,6 +44,7 @@ export const loginUser = async (req, res) => {
 
     const token = createJWT(res, user, tenant.dbName, user.userType);
     user.password = undefined;
+    logger.info("User logged in successfully:", token);
 
     // Get user's permitted menu entries
     const userNavEntries = await UserNavigationBar.find({
