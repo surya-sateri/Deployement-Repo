@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 export const dbConnection = async () => {
+  console.log("Connecting to MongoDB URI:", process.env.MONGODB_URI);
   try {
-    mongoose.set("debug", true);
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI,  { family: 4 });
     console.log("DB connection established: ",process.env.MONGODB_URI);
   } catch (error) {
       const state = mongoose.connection.readyState;
